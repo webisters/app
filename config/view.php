@@ -1,0 +1,23 @@
+<?php
+/*
+ * This file is part of App Project.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+/**
+ * View config.
+ *
+ * @see App::view()
+ * @see https://webisters.com
+ */
+return [
+    'default' => [
+        'base_dir' => APP_DIR . 'Views',
+        'extension' => '.php',
+        'layout_prefix' => '_layouts',
+        'include_prefix' => '_includes',
+        'show_debug_comments' => true,
+        'throw_exceptions_in_destructor' => null,
+    ],
+];

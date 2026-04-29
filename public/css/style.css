@@ -1,0 +1,144 @@
+:root {
+	--brand-blue: #0052FF;
+	--ink: #0d1321;
+	--muted: #5d6472;
+	--line: #dfe4ef;
+	--paper: #f5f7fc;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	display: grid;
+	place-items: center;
+	padding: 1.25rem;
+	background: radial-gradient(1200px 520px at 15% -20%, #eef3ff 0%, #f8f9fc 45%, #f3f5fb 100%);
+	color: var(--ink);
+	font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.landing {
+	width: min(1120px, 92vw);
+	margin: 0 auto;
+}
+
+.landing-topbar {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 0.8rem;
+}
+
+.landing-card {
+	display: grid;
+	grid-template-columns: 1fr 1.1fr;
+	background: #fff;
+	border: 1px solid var(--line);
+	border-radius: 0.7rem;
+	overflow: hidden;
+	min-height: 510px;
+	box-shadow: 0 12px 36px rgba(20, 36, 69, 0.08);
+}
+
+.landing-copy {
+	padding: clamp(1.6rem, 4vw, 3rem);
+	align-self: center;
+}
+
+.eyebrow {
+	margin: 0 0 0.7rem;
+	color: var(--muted);
+	font-size: 0.92rem;
+	font-weight: 600;
+}
+
+.landing-copy h1 {
+	margin: 0;
+	font-size: clamp(2rem, 4vw, 3rem);
+	line-height: 1.05;
+	letter-spacing: -0.02em;
+}
+
+.lead {
+	margin: 0.9rem 0 0;
+	max-width: 34ch;
+	color: var(--muted);
+	line-height: 1.6;
+}
+
+.quick-links {
+	list-style: none;
+	padding: 0;
+	margin: 1.35rem 0 1.6rem;
+}
+
+.quick-links li + li {
+	margin-top: 0.7rem;
+}
+
+.quick-links a {
+	color: var(--brand-blue);
+	text-decoration: none;
+	border-bottom: 1px solid rgba(53, 115, 229, 0.25);
+	padding-bottom: 0.12rem;
+}
+
+.quick-links a:hover {
+	border-bottom-color: rgba(229, 57, 53, 0.7);
+}
+
+.cta {
+	display: inline-block;
+	text-decoration: none;
+	background: #171a21;
+	color: #fff;
+	border-radius: 0.35rem;
+	padding: 0.67rem 1rem;
+	font-weight: 600;
+	letter-spacing: 0.01em;
+}
+
+.landing-visual {
+	position: relative;
+	display: grid;
+	place-items: center;
+	background: linear-gradient(145deg, var(--brand-blue) 0%, #0f63ff 40%, #4382ff 100%);
+	isolation: isolate;
+}
+
+.visual-grid {
+	position: absolute;
+	inset: 0;
+	background-image:
+		linear-gradient(rgba(255, 255, 255, 0.18) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(255, 255, 255, 0.18) 1px, transparent 1px);
+	background-size: 42px 42px;
+	opacity: 0.45;
+}
+
+.brand-logo {
+	position: relative;
+	width: min(380px, 72%);
+	max-width: 380px;
+	height: auto;
+	filter: drop-shadow(0 14px 32px rgba(0, 0, 0, 0.22));
+	z-index: 3;
+}
+
+@media (max-width: 920px) {
+	.landing-card {
+		grid-template-columns: 1fr;
+	}
+
+	.landing-visual {
+		min-height: 320px;
+	}
+
+	.brand-logo {
+		width: min(300px, 68%);
+		max-width: 300px;
+	}
+}

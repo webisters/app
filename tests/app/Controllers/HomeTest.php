@@ -1,0 +1,24 @@
+<?php
+/*
+ * This file is part of App Project.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace Tests\app\Controllers;
+
+use Framework\HTTP\Status;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+use Tests\TestCase;
+
+#[RunTestsInSeparateProcesses]
+final class HomeTest extends TestCase
+{
+    public function testIndex() : void
+    {
+        $this->app->runHttp('http://localhost:8080');
+        self::assertResponseStatusCode(Status::OK);
+        self::assertResponseBodyContains('Webisters');
+        self::assertMatchedRouteName('home.index');
+    }
+}

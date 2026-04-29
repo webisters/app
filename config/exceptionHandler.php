@@ -1,0 +1,33 @@
+<?php
+/*
+ * This file is part of App Project.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+/**
+ * Exceptions config.
+ *
+ * @see App::exceptionHandler()
+ * @see https://webisters.com
+ */
+
+use Framework\Debug\ExceptionHandler;
+
+return [
+    'default' => [
+        'initialize' => true,
+        'handle_errors' => true,
+        'environment' => IS_DEV
+            ? ExceptionHandler::DEVELOPMENT
+            : ExceptionHandler::PRODUCTION,
+        'development_view' => null,
+        'production_view' => null,
+        'search_engine' => null,
+        'show_log_id' => null,
+        'json_flags' => null,
+        'hidden_inputs' => null,
+        'logger_instance' => 'default',
+        'language_instance' => 'default',
+    ],
+];

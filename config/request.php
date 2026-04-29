@@ -1,0 +1,21 @@
+<?php
+/*
+ * This file is part of App Project.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+/**
+ * Request config.
+ *
+ * @see App::request()
+ * @see https://webisters.com
+ */
+return [
+    'default' => [
+        'allowed_hosts' => env('request.default.allowed_hosts', []),
+        'force_https' => env('request.default.force_https', false),
+        'server_vars' => [],
+        'json_flags' => null,
+    ],
+];
