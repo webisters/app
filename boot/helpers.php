@@ -356,3 +356,16 @@ function env(string $key, mixed $default = null) : mixed
 {
     return $_ENV[$key] ?? $default;
 }
+    if (!function_exists('env')) {
+        function env(string $key, $default = null)
+        {
+            $value = $_ENV[$key] ?? null;
+
+            if ($value === null && str_contains($key, '.')) {
+                [$primary, $secondary] = array_pad(explode('.', $key, 2), 2, null);
+                $value = $_ENV[$primary][$secondary] ?? null;
+            }
+
+            return $value ?? $default;
+        }
+    }
