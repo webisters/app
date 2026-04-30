@@ -16,28 +16,39 @@ use Framework\Routing\Route;
 use Framework\Session\Session;
 use JetBrains\PhpStorm\Pure;
 
-/**
- * Load helper files.
- *
- * @param array<int,string>|string $helper A list of helper names as array
- * or a helper name as string
- *
- * @return array<int,string> A list of all loaded files
- */
-function helpers(array | string $helper) : array
-{
-    if (is_array($helper)) {
-        $files = [];
-        foreach ($helper as $item) {
-            $files[] = helpers($item);
+if (!function_exists('helpers')) {
+    function helpers(array | string $helper) : array
+    {
+        if (is_array($helper)) {
+            $files = [];
+            foreach ($helper as $item) {
+                $files[] = helpers($item);
+            }
+            return array_merge(...$files);
         }
-        return array_merge(...$files);
+        $files = App::locator()->findFiles('Helpers/' . $helper);
+        foreach ($files as $file) {
+            require_once $file;
+        }
+        return $files;
     }
-    $files = App::locator()->findFiles('Helpers/' . $helper);
-    foreach ($files as $file) {
-        require_once $file;
+}
+if (!function_exists('helpers')) {
+    function helpers(array | string $helper) : array
+    {
+        if (is_array($helper)) {
+            $files = [];
+            foreach ($helper as $item) {
+                $files[] = helpers($item);
+            }
+            return array_merge(...$files);
+        }
+        $files = App::locator()->findFiles('Helpers/' . $helper);
+        foreach ($files as $file) {
+            require_once $file;
+        }
+        return $files;
     }
-    return $files;
 }
 
 /**
@@ -76,37 +87,58 @@ function view(string $path, array $variables = [], string $instance = 'default')
  *
  * @return string
  */
-function current_url() : string
-{
-    return App::request()->getUrl()->toString();
+if (!function_exists('current_url')) {
+    function current_url() : string
+    {
+        return App::request()->getUrl()->toString();
+    }
 }
 
-/**
- * Get a URL for a public asset.
- *
- * @param string $path The asset path relative to public/
- *
- * @return string
- */
-function asset(string $path) : string
-{
-    $path = trim($path, '/');
-    $documentRoot = rtrim($_SERVER['DOCUMENT_ROOT'] ?? '', '/\\');
-    if ($documentRoot !== '') {
-        $direct = $documentRoot . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $path);
-        if (!is_file($direct)) {
-            $public = $documentRoot . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR
-                . str_replace('/', DIRECTORY_SEPARATOR, $path);
-            if (is_file($public)) {
-                $path = 'public/' . $path;
+if (!function_exists('asset')) {
+    function asset(string $path) : string
+    {
+        $path = trim($path, '/');
+        $documentRoot = rtrim($_SERVER['DOCUMENT_ROOT'] ?? '', '/\\');
+        if ($documentRoot !== '') {
+            $direct = $documentRoot . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $path);
+            if (!is_file($direct)) {
+                $public = $documentRoot . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR
+                    . str_replace('/', DIRECTORY_SEPARATOR, $path);
+                if (is_file($public)) {
+                    $path = 'public/' . $path;
+                }
             }
         }
+        return App::request()->getUrl()->getBaseUrl($path);
     }
-    return App::request()->getUrl()->getBaseUrl($path);
+}
+if (!function_exists('asset')) {
+    function asset(string $path) : string
+    {
+        $path = trim($path, '/');
+        $documentRoot = rtrim($_SERVER['DOCUMENT_ROOT'] ?? '', '/\\');
+        if ($documentRoot !== '') {
+            $direct = $documentRoot . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $path);
+            if (!is_file($direct)) {
+                $public = $documentRoot . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR
+                    . str_replace('/', DIRECTORY_SEPARATOR, $path);
+                if (is_file($public)) {
+                    $path = 'public/' . $path;
+                }
+            }
+        }
+        return App::request()->getUrl()->getBaseUrl($path);
+    }
 }
 
 /**
  * Get the current Route.
+if (!function_exists('current_url')) {
+    function current_url() : string
+    {
+        return App::request()->getUrl()->toString();
+    }
+}
  *
  * @return Route
  */
@@ -218,35 +250,53 @@ function csrf_input(string $instance = 'default') : string
     return App::antiCsrf($instance)->input();
 }
 
-/**
- * Set Response status as "404 Not Found" and auto set body as
- * JSON or HTML page based on Request Content-Type header.
- *
- * @param array<string,mixed> $variables
- *
- * @return Response
- */
-function respond_not_found(array $variables = []) : Response
-{
-    $request = App::request();
-    $response = App::response();
-    $response->setStatus(404);
-    if ($request->isJson() || $request->negotiateAccept([
-            'text/html',
-            'application/json',
-        ]) === 'application/json') {
-        return $response->setJson([
-            'error' => [
-                'code' => 404,
-                'reason' => 'Not Found',
-            ],
-        ]);
+if (!function_exists('respond_not_found')) {
+    function respond_not_found(array $variables = []) : Response
+    {
+        $request = App::request();
+        $response = App::response();
+        $response->setStatus(404);
+        if ($request->isJson() || $request->negotiateAccept([
+                'text/html',
+                'application/json',
+            ]) === 'application/json') {
+            return $response->setJson([
+                'error' => [
+                    'code' => 404,
+                    'reason' => 'Not Found',
+                ],
+            ]);
+        }
+        $variables['title'] ??= lang('routing.error404');
+        $variables['message'] ??= lang('routing.pageNotFound');
+        return $response->setBody(
+            view('errors/404', $variables)
+        );
     }
-    $variables['title'] ??= lang('routing.error404');
-    $variables['message'] ??= lang('routing.pageNotFound');
-    return $response->setBody(
-        view('errors/404', $variables)
-    );
+}
+if (!function_exists('respond_not_found')) {
+    function respond_not_found(array $variables = []) : Response
+    {
+        $request = App::request();
+        $response = App::response();
+        $response->setStatus(404);
+        if ($request->isJson() || $request->negotiateAccept([
+                'text/html',
+                'application/json',
+            ]) === 'application/json') {
+            return $response->setJson([
+                'error' => [
+                    'code' => 404,
+                    'reason' => 'Not Found',
+                ],
+            ]);
+        }
+        $variables['title'] ??= lang('routing.error404');
+        $variables['message'] ??= lang('routing.pageNotFound');
+        return $response->setBody(
+            view('errors/404', $variables)
+        );
+    }
 }
 
 /**
