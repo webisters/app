@@ -10,8 +10,17 @@ Webisters App Project This project is intended as an application-level codebase 
 ## Setup
 ```bash
 composer global require webisters/webisters
-php webisters new-app app
+# Optional (Windows): automatically adds Composer global bin-dir to PATH
+composer global exec webisters setup
+
+# Create the project (preferred)
+webisters new-app app
+
+# If `webisters` is not on PATH yet, use the no-PATH fallback:
+# composer global exec webisters new-app app
+
 cd app
+composer install
 ```
 
 ## Run Locally
