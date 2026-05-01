@@ -31,7 +31,7 @@
         }
     ],
     "require": {
-        "php": ">=8.3",
+        "php": ">=8.2",
         "webisters/framework": "^1.0"
     },
     "require-dev": {
