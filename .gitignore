@@ -1,6 +1,5 @@
 .config.php
 .env
-.env.php
 .idea
 .php-cs-fixer.cache
 .phpunit.cache
