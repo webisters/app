@@ -29,7 +29,7 @@ return [
     'default' => [
         'find_in_namespaces' => false,
         'directories' => [
-            APLUS_DIR . 'dev-commands/src',
+            WEBISTERS_DIR . 'dev-commands/src',
             APP_DIR . 'Commands',
         ],
         'commands' => $commands,

@@ -26,6 +26,6 @@ final class ConstantsTest extends TestCase
         self::assertDirectoryExists(PUBLIC_DIR);
         self::assertDirectoryExists(STORAGE_DIR);
         self::assertDirectoryExists(VENDOR_DIR);
-        self::assertDirectoryExists(APLUS_DIR);
+        self::assertDirectoryExists(WEBISTERS_DIR);
     }
 }

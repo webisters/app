@@ -71,6 +71,6 @@ if (!defined('VENDOR_DIR')) {
 /**
  * Path to the webisters directory.
  */
-if (!defined('APLUS_DIR')) {
-	define('APLUS_DIR', VENDOR_DIR . 'webisters' . \DIRECTORY_SEPARATOR);
+if (!defined('WEBISTERS_DIR')) {
+	define('WEBISTERS_DIR', VENDOR_DIR . 'webisters' . \DIRECTORY_SEPARATOR);
 }
