@@ -1,0 +1,48 @@
+name: Feature request
+description: Suggest an improvement or new capability
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or use case
+      description: Describe the problem this feature would solve.
+      placeholder: Explain who needs this feature and why.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_solution
+    attributes:
+      label: Proposed solution
+      description: Describe how you think the problem should be solved.
+      placeholder: Explain your proposed approach.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: backwards_compatibility
+    attributes:
+      label: Could this break backwards compatibility?
+      description: Consider existing public APIs and user workflows.
+      options:
+        - "No"
+        - "Yes"
+        - Not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Describe other solutions or workarounds you considered.
+
+  - type: checkboxes
+    id: willing_to_pr
+    attributes:
+      label: Contribution
+      options:
+        - label: I am willing to submit a pull request for this feature.
