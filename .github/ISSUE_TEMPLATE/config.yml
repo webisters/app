@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Webisters Forum
+    url: https://github.com/webisters/forum
+    about: Ask questions and discuss ideas with the Webisters community.
+  - name: Webisters Documentation
+    url: https://webisters.com
+    about: Read the Webisters documentation and guides.
+  - name: Security Policy
+    url: https://github.com/webisters/app/blob/main/SECURITY.md
+    about: Report security vulnerabilities privately by following the security policy.
