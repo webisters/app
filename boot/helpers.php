@@ -100,10 +100,10 @@ if (!function_exists('asset')) {
         $path = trim($path, '/');
         $documentRoot = rtrim($_SERVER['DOCUMENT_ROOT'] ?? '', '/\\');
         if ($documentRoot !== '') {
-            $direct = $documentRoot . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $path);
+            $direct = $documentRoot . \DIRECTORY_SEPARATOR . str_replace('/', \DIRECTORY_SEPARATOR, $path);
             if (!is_file($direct)) {
-                $public = $documentRoot . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR
-                    . str_replace('/', DIRECTORY_SEPARATOR, $path);
+                $public = $documentRoot . \DIRECTORY_SEPARATOR . 'public' . \DIRECTORY_SEPARATOR
+                    . str_replace('/', \DIRECTORY_SEPARATOR, $path);
                 if (is_file($public)) {
                     $path = 'public/' . $path;
                 }
@@ -118,10 +118,10 @@ if (!function_exists('asset')) {
         $path = trim($path, '/');
         $documentRoot = rtrim($_SERVER['DOCUMENT_ROOT'] ?? '', '/\\');
         if ($documentRoot !== '') {
-            $direct = $documentRoot . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $path);
+            $direct = $documentRoot . \DIRECTORY_SEPARATOR . str_replace('/', \DIRECTORY_SEPARATOR, $path);
             if (!is_file($direct)) {
-                $public = $documentRoot . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR
-                    . str_replace('/', DIRECTORY_SEPARATOR, $path);
+                $public = $documentRoot . \DIRECTORY_SEPARATOR . 'public' . \DIRECTORY_SEPARATOR
+                    . str_replace('/', \DIRECTORY_SEPARATOR, $path);
                 if (is_file($public)) {
                     $path = 'public/' . $path;
                 }
@@ -133,12 +133,12 @@ if (!function_exists('asset')) {
 
 /**
  * Get the current Route.
-if (!function_exists('current_url')) {
-    function current_url() : string
-    {
-        return App::request()->getUrl()->toString();
-    }
-}
+ * if (!function_exists('current_url')) {
+ * function current_url() : string
+ * {
+ * return App::request()->getUrl()->toString();
+ * }
+ * }.
  *
  * @return Route
  */

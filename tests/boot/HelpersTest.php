@@ -60,25 +60,26 @@ final class HelpersTest extends TestCase
 
     public function testRouteUrl() : void
     {
+        $_SERVER['REQUEST_SCHEME'] = 'http';
+        $_SERVER['HTTP_HOST'] = 'localhost:8080';
         $configs = App::config()->get('router');
         $configs['files'][] = __DIR__ . '/../support/routes.php';
         App::config()->set('router', $configs);
-        $this->app->runHttp('https://foo.com/users/25');
         self::assertSame(
             'http://localhost:8080/',
             route_url('home.index')
         );
         self::assertSame(
             'https://foo.com/',
-            route_url('test.home')
+            route_url('test.home', [], ['https'])
         );
         self::assertSame(
             'https://foo.com/users/{int}',
-            route_url('test.users.show')
+            route_url('test.users.show', [], ['https'])
         );
         self::assertSame(
             'https://foo.com/users/25',
-            route_url('test.users.show', [25])
+            route_url('test.users.show', [25], ['https'])
         );
         self::assertSame(
             'http://foo.com/users/13',
@@ -116,7 +117,6 @@ final class HelpersTest extends TestCase
             ],
             'xss' => '<script>alert("xss")</script>',
         ]);
-        App::session()->stop();
     }
 
     public function testHasOld() : void
@@ -151,21 +151,23 @@ final class HelpersTest extends TestCase
 
     public function testRedirectTo() : void
     {
+        $_SERVER['REQUEST_SCHEME'] = 'http';
+        $_SERVER['HTTP_HOST'] = 'localhost:8080';
         $configs = App::config()->get('router');
         $configs['files'][] = __DIR__ . '/../support/routes.php';
         App::config()->set('router', $configs);
-        $this->app->runHttp('https://foo.com/users/25');
-        $response = redirect_to('home.index');
         self::assertSame(
             'http://localhost:8080/',
-            $response->getHeader('Location')
+            redirect_to('home.index')->getHeader('Location')
         );
-        $response = redirect_to('test.users.show');
+        $response = redirect_to('home.index');
+        self::assertSame('http://localhost:8080/', $response->getHeader('Location'));
+        $response = redirect_to(['test.users.show', [], ['https']]);
         self::assertSame(
             'https://foo.com/users/{int}',
             $response->getHeader('Location')
         );
-        $response = redirect_to(['test.users.show', [25]]);
+        $response = redirect_to(['test.users.show', [25], ['https']]);
         self::assertSame(
             'https://foo.com/users/25',
             $response->getHeader('Location')

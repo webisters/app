@@ -22,9 +22,13 @@ final class IndexTest extends TestCase
         \ob_start();
         require __DIR__ . '/../../public/index.php';
         $contents = \ob_get_clean();
-        $headers = xdebug_get_headers();
         self::assertNotEmpty($contents);
         self::assertSame(Status::OK, \http_response_code());
-        self::assertContains('Content-Type: text/html; charset=UTF-8', $headers);
+        if (\function_exists('xdebug_get_headers')) {
+            self::assertContains(
+                'Content-Type: text/html; charset=UTF-8',
+                \xdebug_get_headers()
+            );
+        }
     }
 }

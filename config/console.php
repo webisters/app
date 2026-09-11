@@ -20,7 +20,7 @@ foreach ([
     Webisters\Commands\MakeView::class,
     Webisters\Commands\RouteList::class,
 ] as $command) {
-    if (\class_exists($command)) {
+    if (class_exists($command)) {
         $commands[] = $command;
     }
 }
