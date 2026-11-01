@@ -27,7 +27,7 @@ final class IndexTest extends TestCase
         if (\function_exists('xdebug_get_headers')) {
             self::assertContains(
                 'Content-Type: text/html; charset=UTF-8',
-                \xdebug_get_headers()
+                xdebug_get_headers()
             );
         }
     }
